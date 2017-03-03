@@ -2,21 +2,20 @@
         <md-toolbar color="primary"> 
             <span>Find city details</span>
             <span class="example-spacer"></span>
-            <md-input-container>
-                <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="myControl">
-            </md-input-container>
-
-            <md-autocomplete #auto="mdAutocomplete">
-                <md-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{ option }}
-                </md-option>
-            </md-autocomplete>
+            
         </md-toolbar>
-<h1>
-  {{title}}
-</h1>
-
 <div>
+    <div>
+        <md-input-container>
+            <input placeholder="Search City" mdInput [mdAutocomplete]="auto" [formControl]="txtSearchCity" class="txtSearchCity">
+        </md-input-container>
+
+        <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="selected($event)">
+                {{ option }}
+            </md-option>
+        </md-autocomplete>
+    </div>
     <a md-button color="primary">Flat button</a>
     
     <a md-fab color="primary"><md-icon>check</md-icon></a>

@@ -11,7 +11,7 @@ import {Observable} from 'rxjs/Observable';
 export class AppComponent {
   title = 'app works!';
 
-  myControl = new FormControl();
+  txtSearchCity = new FormControl();
   options = [
     'Alabama',
     'Alaska',
@@ -67,7 +67,7 @@ export class AppComponent {
    filteredOptions: any;
 
    ngOnInit() {
-      this.filteredOptions = this.myControl.valueChanges
+      this.filteredOptions = this.txtSearchCity.valueChanges 
          .startWith(null)
          .map(name => this.filter(name));
    }
@@ -76,5 +76,8 @@ export class AppComponent {
       return this.options.filter(option => new RegExp(val, 'gi').test(option)); 
    }
 
-   
+   selected(val: string): void {
+      //debugger;
+      
+   }
 }
