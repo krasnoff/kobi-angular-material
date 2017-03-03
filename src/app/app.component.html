@@ -2,7 +2,15 @@
         <md-toolbar color="primary"> 
             <span>Find city details</span>
             <span class="example-spacer"></span>
-            <md-icon class="example-icon">verified_user</md-icon>
+            <md-input-container>
+                <input mdInput placeholder="State" [mdAutocomplete]="auto" [formControl]="myControl">
+            </md-input-container>
+
+            <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{ option }}
+                </md-option>
+            </md-autocomplete>
         </md-toolbar>
 <h1>
   {{title}}
