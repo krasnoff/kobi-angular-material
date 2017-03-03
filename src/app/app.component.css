@@ -8,3 +8,33 @@
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
+.search-button, .search-close-button
+{
+    background-color: transparent;
+    color: white;
+    border: 0px;
+    outline: none;
+    cursor: pointer;
+}
+
+.txtSearchCity
+{
+    background-color: transparent;
+    color:white;
+    border: 0px;
+    outline: none;
+    border-bottom: 1px solid white;
+    display: none;
+}
+
+.block
+{
+    display: block;
+    animation-name: example;
+    animation-duration: 1;
+}
+
+@keyframes example {
+    from {display: none;}
+    to {display: block;}
+}

@@ -10,6 +10,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class AppComponent {
   title = 'app works!';
+  txtSearchCity_class = 'txtSearchCity';
 
   txtSearchCity = new FormControl();
   options = [
@@ -78,6 +79,12 @@ export class AppComponent {
 
    selected(val: string): void {
       //debugger;
-      
+   }
+
+   showSearchTextBox(val: string): void {
+      if (this.txtSearchCity_class == 'txtSearchCity') 
+        this.txtSearchCity_class = 'txtSearchCity block';
+      else
+         this.txtSearchCity_class = 'txtSearchCity';
    }
 }
