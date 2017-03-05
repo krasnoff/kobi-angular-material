@@ -26,3 +26,25 @@
     border-bottom: 1px solid white;
     width: 0px;
 }
+
+.mainController
+{
+  padding-bottom: 20px;
+  height: 1210px !important;
+}
+
+div.mainScreen
+{
+    margin: 10px 10px 10px 10px;
+}
+
+div.mainScreen > div
+{
+    margin: 10px 10px 10px 10px;
+    
+}
+
+div.mainScreen > div > .mat-card
+{
+    background-color: #e1e7f3;
+}
