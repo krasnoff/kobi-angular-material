@@ -1,16 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, NgModule, animate, state, style, transition, trigger } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [trigger(
+      'openClose',
+      [
+        state('collapsed, void', style({width: '0px'})),
+        state('expanded', style({width: '170px'})),
+        transition(
+            'collapsed <=> expanded', [animate(300, style({width: '170px'})), animate(300)])
+      ])]
 })
 export class AppComponent {
   title = 'app works!';
-  txtSearchCity_class = 'txtSearchCity';
+  stateExpression = 'collapsed';
 
   txtSearchCity = new FormControl();
   options = [
@@ -71,6 +78,7 @@ export class AppComponent {
       this.filteredOptions = this.txtSearchCity.valueChanges 
          .startWith(null)
          .map(name => this.filter(name));
+
    }
 
    filter(val: string): string[] {
@@ -82,9 +90,6 @@ export class AppComponent {
    }
 
    showSearchTextBox(val: string): void {
-      if (this.txtSearchCity_class == 'txtSearchCity') 
-        this.txtSearchCity_class = 'txtSearchCity block';
-      else
-         this.txtSearchCity_class = 'txtSearchCity';
+      this.stateExpression = (this.stateExpression != 'expanded') ? 'expanded' : 'collapsed';
    }
 }

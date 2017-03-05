@@ -24,17 +24,5 @@
     border: 0px;
     outline: none;
     border-bottom: 1px solid white;
-    display: none;
-}
-
-.block
-{
-    display: block;
-    animation-name: example;
-    animation-duration: 1;
-}
-
-@keyframes example {
-    from {display: none;}
-    to {display: block;}
+    width: 0px;
 }
