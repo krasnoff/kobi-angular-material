@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import 'hammerjs';
 import { ReactiveFormsModule } from '@angular/forms'
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 
@@ -19,7 +20,8 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
