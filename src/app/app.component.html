@@ -5,6 +5,7 @@
             <button class="search-button" mdTooltip="Search!" (click)="showSearchTextBox($event)"><i class="material-icons">search</i></button>
             <input mdInput [mdAutocomplete]="auto" [formControl]="txtSearchCity" [@openClose]="stateExpression" class="txtSearchCity">
             
+            
             <md-autocomplete #auto="mdAutocomplete">
                 <md-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="selected($event)">
                     {{ option }}
