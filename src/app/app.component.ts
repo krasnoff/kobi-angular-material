@@ -79,7 +79,7 @@ export class AppComponent {
     'Wyoming'
    ];
    filteredOptions: any;
-   getData: any[];
+   getData: string[];
 
    ngOnInit() {
       this.filteredOptions = this.txtSearchCity.valueChanges 
