@@ -39,12 +39,9 @@ export class AppComponent {
       this.filteredOptions = this.txtSearchCity.valueChanges
         .debounceTime(200) // wait 200ms after each keystroke before considering the term
         .distinctUntilChanged() // ignore if next search term is same as previous
-        .switchMap(name => { 
-          if (name.length > 2) 
-            return this._httpService.getMethod('http://gd.geobytes.com/AutoCompleteCity?callback=JSONP_CALLBACK&sort=size&q=' + encodeURIComponent(name) + '&_=1489163270176') // return the http search observable
-          else
-            return Observable.of<string[]>([]) // or the observable of empty heroes if there was no search term
-        })
+        .switchMap(name => (name && name.length > 2)
+           ? this._httpService.getMethod('http://gd.geobytes.com/AutoCompleteCity?callback=JSONP_CALLBACK&sort=size&q=' + encodeURIComponent(name) + '&_=1489163270176') // return the http search observable
+           : Observable.of<string[]>([])) // or the observable of empty heroes if there was no search term
         .catch(error => {
           // TODO: add real error handling
           console.log(error);
@@ -68,8 +65,8 @@ export class AppComponent {
   }*/
 
   selected(val: string): void {
-      // TODO continue from here
-      debugger;
+      // TODO get data from txtSearchCity
+      //debugger;
   }
 
   showSearchTextBox(val: string): void {
