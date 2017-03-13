@@ -53,7 +53,20 @@ export class AppComponent {
       this._httpService.getJSONPMethod('http://gd.geobytes.com/GetCityDetails?callback=JSONP_CALLBACK&fqcn=' + encodeURIComponent(this.txtSearchCity.value) + '&_=1489427233326')
         .subscribe(
           data => {
-            this.getData = data
+            this._httpService.getMethod('http://api.openweathermap.org/data/2.5/forecast?lat=' + data.geobyteslatitude + '&lon=' + data.geobyteslongitude + '&units=metric&appid=0bf971eb6a4bfaad90e8a7a487cad578')
+              .subscribe (
+                data => this.getData = data
+              );
+
+            this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&action=query&list=geosearch&gscoord=' + data.geobyteslatitude + '%7C' + data.geobyteslongitude + '&gsradius=10000&gslimit=10&format=json')
+              .subscribe (
+                data => {
+                  debugger
+                },
+                error => {
+                  debugger
+                }
+              );
           },
           error => alert("Error: " + error._body),
           () => {
