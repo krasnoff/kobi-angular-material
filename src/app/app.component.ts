@@ -33,14 +33,14 @@ export class AppComponent {
   txtSearchCity = new FormControl();
   options = [];
   filteredOptions: any;
-  getData: string;
+  getData: any;
 
   ngOnInit() {
       this.filteredOptions = this.txtSearchCity.valueChanges
         .debounceTime(200) // wait 200ms after each keystroke before considering the term
         .distinctUntilChanged() // ignore if next search term is same as previous
         .switchMap(name => (name && name.length > 2)
-           ? this._httpService.getMethod('http://gd.geobytes.com/AutoCompleteCity?callback=JSONP_CALLBACK&sort=size&q=' + encodeURIComponent(name) + '&_=1489163270176') // return the http search observable
+           ? this._httpService.getJSONPMethod('http://gd.geobytes.com/AutoCompleteCity?callback=JSONP_CALLBACK&sort=size&q=' + encodeURIComponent(name) + '&_=1489163270176') // return the http search observable
            : Observable.of<string[]>([])) // or the observable of empty heroes if there was no search term
         .catch(error => {
           // TODO: add real error handling
@@ -49,24 +49,17 @@ export class AppComponent {
         })
   }
 
-  /*filter(val: string): string[] {
-      // test my new service
-      this._httpService.getMethod('http://gd.geobytes.com/AutoCompleteCity?callback=JSONP_CALLBACK&sort=size&q=' + encodeURIComponent(val) + '&_=1489163270176')
+  selected(val: string): void {
+      this._httpService.getJSONPMethod('http://gd.geobytes.com/GetCityDetails?callback=JSONP_CALLBACK&fqcn=' + encodeURIComponent(this.txtSearchCity.value) + '&_=1489427233326')
         .subscribe(
-          data => this.getData = JSON.stringify(data),
+          data => {
+            this.getData = data
+          },
           error => alert("Error: " + error._body),
           () => {
             console.log('finished') 
           }
         );
-      
-      //this.options = this.getData ? JSON.parse(this.getData) : [];
-      return this.getData ? JSON.parse(this.getData) : [];
-  }*/
-
-  selected(val: string): void {
-      // TODO get data from txtSearchCity
-      //debugger;
   }
 
   showSearchTextBox(val: string): void {

@@ -6,7 +6,7 @@ import {Jsonp} from "@angular/http";
 export class HttpService {
     constructor (private _jsonp: Jsonp) {}
     
-    getMethod(url: string) {
+    getJSONPMethod(url: string) {
         return this._jsonp.get(url)
             .map(res => res.json());
             
