@@ -1,6 +1,6 @@
 <div layout="column" style="height:700px" ng-cloak id="mainController" class="mainController">
         <md-toolbar color="primary"> 
-            <span>Find city details</span>
+            <span (click)="testClick($event)">Find city details</span>
             <span class="example-spacer"></span>
             <button class="search-button" mdTooltip="Search!" (click)="showSearchTextBox($event)"><i class="material-icons">search</i></button>
             <input mdInput [mdAutocomplete]="auto" [formControl]="txtSearchCity" [@openClose]="stateExpression" class="txtSearchCity">
@@ -16,19 +16,21 @@
     <div class="flex-container mainScreen" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
             <md-card>
-                1
+                1 {{lng}}
             </md-card>
         </div>
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
              <md-card>
-                2
+                2 {{lat}}
             </md-card>
         </div>
     </div>
     <div class="flex-container mainScreen" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
         <div class="flex-item" fxFlex="100%" fxFlex.xs="100%">
             <md-card>
-                3
+                <sebm-google-map [latitude]="lat" [longitude]="lng">
+                    <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+                </sebm-google-map>
             </md-card>
         </div>
     </div>

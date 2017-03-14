@@ -35,6 +35,10 @@ export class AppComponent {
   filteredOptions: any;
   getData: any;
 
+  lat: number;
+  lng: number;
+
+
   ngOnInit() {
       this.filteredOptions = this.txtSearchCity.valueChanges
         .debounceTime(200) // wait 200ms after each keystroke before considering the term
@@ -47,12 +51,14 @@ export class AppComponent {
           console.log(error);
           return Observable.of<string[]>([]);
         })
+
+        
   }
 
   selected(val: string): void {
       this._httpService.getJSONPMethod('http://gd.geobytes.com/GetCityDetails?callback=JSONP_CALLBACK&fqcn=' + encodeURIComponent(this.txtSearchCity.value) + '&_=1489427233326')
         .subscribe(
-          data => {
+          (data) => {
             this._httpService.getMethod('http://api.openweathermap.org/data/2.5/forecast?lat=' + data.geobyteslatitude + '&lon=' + data.geobyteslongitude + '&units=metric&appid=0bf971eb6a4bfaad90e8a7a487cad578')
               .subscribe (
                 data => this.getData = data
@@ -61,18 +67,27 @@ export class AppComponent {
             this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&action=query&list=geosearch&gscoord=' + data.geobyteslatitude + '%7C' + data.geobyteslongitude + '&gsradius=10000&gslimit=10&format=json')
               .subscribe (
                 data => {
-                  debugger
+                  //debugger
                 },
                 error => {
-                  debugger
+                  //debugger
                 }
               );
+
+            this.testClick(data.geobyteslatitude, data.geobyteslongitude);
           },
           error => alert("Error: " + error._body),
           () => {
             console.log('finished') 
           }
         );
+  }
+
+  
+  
+  testClick(geobyteslatitude: number, geobyteslongitude: number): void {
+    this.lat = Number(geobyteslatitude);
+    this.lng = Number(geobyteslongitude);
   }
 
   showSearchTextBox(val: string): void {

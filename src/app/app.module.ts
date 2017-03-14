@@ -9,7 +9,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 
-
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,10 @@ import { AppComponent } from './app.component';
     MaterialModule.forRoot(),
     ReactiveFormsModule,
     FlexLayoutModule.forRoot(),
-    JsonpModule
+    JsonpModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDVugjLJqZ4Hrtl2xrFQfw6O10T3VgY-s0'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
