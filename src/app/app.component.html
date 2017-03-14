@@ -1,6 +1,6 @@
 <div layout="column" style="height:700px" ng-cloak id="mainController" class="mainController">
         <md-toolbar color="primary"> 
-            <span (click)="testClick($event)">Find city details</span>
+            <span>Find city details</span>
             <span class="example-spacer"></span>
             <button class="search-button" mdTooltip="Search!" (click)="showSearchTextBox($event)"><i class="material-icons">search</i></button>
             <input mdInput [mdAutocomplete]="auto" [formControl]="txtSearchCity" [@openClose]="stateExpression" class="txtSearchCity">

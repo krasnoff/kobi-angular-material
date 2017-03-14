@@ -74,20 +74,14 @@ export class AppComponent {
                 }
               );
 
-            this.testClick(data.geobyteslatitude, data.geobyteslongitude);
+            this.lat = Number(data.geobyteslatitude);
+            this.lng = Number(data.geobyteslongitude);
           },
           error => alert("Error: " + error._body),
           () => {
             console.log('finished') 
           }
         );
-  }
-
-  
-  
-  testClick(geobyteslatitude: number, geobyteslongitude: number): void {
-    this.lat = Number(geobyteslatitude);
-    this.lng = Number(geobyteslongitude);
   }
 
   showSearchTextBox(val: string): void {
