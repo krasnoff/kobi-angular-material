@@ -49,6 +49,17 @@ div.mainScreen > div > .mat-card
     background-color: #e1e7f3;
 }
 
+div.mainScreen div.cityTitle
+{
+    font-weight: 700;
+}
+
+div.mainScreen div.cityDesc
+{
+    font-size: 0.9em;
+    padding-bottom: 0.5em;
+}
+
 .sebm-google-map-container {
   height: 300px;
 }

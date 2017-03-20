@@ -8,7 +8,6 @@ import 'hammerjs';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
-
 import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({

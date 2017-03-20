@@ -1,4 +1,4 @@
-import { Component, NgModule, animate, state, style, transition, trigger } from '@angular/core';
+import { Component, NgModule, animate, state, style, transition, trigger, Pipe, PipeTransform } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {HttpService} from './app.component.service';
@@ -23,7 +23,6 @@ import 'rxjs/add/operator/distinctUntilChanged';
   providers: [HttpService]
 })
 export class AppComponent {
-  title = 'app works!';
   stateExpression = 'collapsed';
 
   constructor(private _httpService:HttpService) {
@@ -38,7 +37,8 @@ export class AppComponent {
   lat: number;
   lng: number;
 
-
+  sitesArr = [];
+  
   ngOnInit() {
       this.filteredOptions = this.txtSearchCity.valueChanges
         .debounceTime(200) // wait 200ms after each keystroke before considering the term
@@ -67,7 +67,25 @@ export class AppComponent {
             this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&action=query&list=geosearch&gscoord=' + data.geobyteslatitude + '%7C' + data.geobyteslongitude + '&gsradius=10000&gslimit=10&format=json')
               .subscribe (
                 data => {
-                  //debugger
+                  var pagesIDArr = "";
+                  for (var i = 0; i < data.query.geosearch.length; i++)
+                    pagesIDArr += String(data.query.geosearch[i].pageid) + "|"
+                  
+                  if (pagesIDArr.length > 0)
+                    pagesIDArr = pagesIDArr.substring(0, pagesIDArr.length - 1);
+
+                  this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&pageids=' + encodeURIComponent(pagesIDArr) + '&redirects=')
+                    .subscribe (
+                      data => {
+                        debugger;
+                        for (var key in data.query.pages) {
+                          this.sitesArr.push(data.query.pages[key])
+                        }
+                      },
+                      error => {
+                        debugger;
+                      }
+                    );
                 },
                 error => {
                   //debugger
@@ -86,5 +104,16 @@ export class AppComponent {
 
   showSearchTextBox(val: string): void {
       this.stateExpression = (this.stateExpression != 'expanded') ? 'expanded' : 'collapsed';
+  }
+}
+
+@Pipe({name: 'keys'})
+export class KeysPipe implements PipeTransform {
+  transform(value, args:string[]) : any {
+    let keys = [];
+    for (let key in value) {
+      keys.push({key: key, value: value[key]});
+    }
+    return keys;
   }
 }

@@ -16,7 +16,11 @@
     <div class="flex-container mainScreen" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
             <md-card>
-                1 {{lng}}
+                <div *ngFor="let el of sitesArr">
+                    <div class="cityTitle">{{ el.title }}</div>
+                    <div class="cityDesc">{{ el.extract }}</div>
+                </div>
+                
             </md-card>
         </div>
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
