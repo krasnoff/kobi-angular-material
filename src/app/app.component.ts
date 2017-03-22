@@ -32,7 +32,7 @@ export class AppComponent {
   txtSearchCity = new FormControl();
   options = [];
   filteredOptions: any;
-  getData: any;
+  cityData = [];
 
   lat: number;
   lng: number;
@@ -61,7 +61,7 @@ export class AppComponent {
           (data) => {
             this._httpService.getMethod('http://api.openweathermap.org/data/2.5/forecast?lat=' + data.geobyteslatitude + '&lon=' + data.geobyteslongitude + '&units=metric&appid=0bf971eb6a4bfaad90e8a7a487cad578')
               .subscribe (
-                data => this.getData = data
+                data => this.cityData = data.list
               );
 
             this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&action=query&list=geosearch&gscoord=' + data.geobyteslatitude + '%7C' + data.geobyteslongitude + '&gsradius=10000&gslimit=10&format=json')
@@ -77,13 +77,13 @@ export class AppComponent {
                   this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&pageids=' + encodeURIComponent(pagesIDArr) + '&redirects=')
                     .subscribe (
                       data => {
-                        debugger;
+                        this.sitesArr = [];
                         for (var key in data.query.pages) {
                           this.sitesArr.push(data.query.pages[key])
                         }
                       },
                       error => {
-                        debugger;
+                        
                       }
                     );
                 },
