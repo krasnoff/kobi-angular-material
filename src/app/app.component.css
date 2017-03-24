@@ -63,3 +63,11 @@ div.mainScreen div.cityDesc
 .sebm-google-map-container {
   height: 300px;
 }
+
+div.wrap_scroller
+{
+    height: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}

@@ -16,16 +16,24 @@
     <div class="flex-container mainScreen" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
             <md-card>
-                <div *ngFor="let el of sitesArr">
-                    <div class="cityTitle">{{ el.title }}</div>
-                    <div class="cityDesc">{{ el.extract }}</div>
+                <div class="wrap_scroller">
+                    <div *ngFor="let el of sitesArr">
+                        <div class="cityTitle">{{ el.title }}</div>
+                        <div class="cityDesc">{{ el.extract }}</div>
+                    </div>
                 </div>
-                
             </md-card>
         </div>
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
              <md-card>
-                2 {{lat}}
+                <div class="wrap_scroller">
+                    <div *ngFor="let item of cityData">
+                        <h3>{{item.dt_txt}}</h3>
+                        <div>Average Tempreture: {{item.main.temp}}&#8451;</div>
+                        <div>Description: {{item.weather[0].description}}</div>
+                        <div><img src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png"></div>
+                    </div>
+                </div>
             </md-card>
         </div>
     </div>
