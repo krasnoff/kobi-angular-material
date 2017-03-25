@@ -17,10 +17,10 @@
         <div class="flex-item" fxFlex="50%" fxFlex.xs="50%">
             <md-card>
                 <div class="wrap_scroller">
-                    <div *ngFor="let el of sitesArr">
-                        <div class="cityTitle">{{ el.title }}</div>
-                        <div class="cityDesc">{{ el.extract }}</div>
-                    </div>
+                    <div *ngFor="let entry of sitesArrKeys | keys">           
+                        <div class="cityTitle">{{ entry.value.title }}</div>
+                        <div class="cityDesc">{{ entry.value.extract }}</div>
+                    </div>         
                 </div>
             </md-card>
         </div>
