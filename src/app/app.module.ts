@@ -9,13 +9,13 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
-import { KeyPipe } from './key.pipe';
+import { KeysPipe } from './key.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    KeyPipe
+    KeysPipe
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,7 @@ export class AppComponent {
   lat: number;
   lng: number;
 
-  sitesArr = [];
+  sitesArr: any;
   
   ngOnInit() {
       this.filteredOptions = this.txtSearchCity.valueChanges
@@ -77,10 +77,8 @@ export class AppComponent {
                   this._httpService.getJSONPMethod('https://en.wikipedia.org/w/api.php?callback=JSONP_CALLBACK&format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&pageids=' + encodeURIComponent(pagesIDArr) + '&redirects=')
                     .subscribe (
                       data => {
-                        this.sitesArr = [];
-                        for (var key in data.query.pages) {
-                          this.sitesArr.push(data.query.pages[key])
-                        }
+                        this.sitesArr = data.query.pages;
+                        
                       },
                       error => {
                         
